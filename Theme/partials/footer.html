@@ -1,0 +1,51 @@
+<!-- Footer -->
+<div class="footer">
+  <strong>The Vibepreneur LLC</strong><br><br>
+  <a href="#">Terms</a> · <a href="#">Privacy</a> · <a href="#">Support</a>
+</div>
+</main>
+</body>
+
+<script>
+  const panel = document.getElementById('vibe-panel');
+  const bg1   = document.querySelector('.bg-1');
+  const bg2   = document.querySelector('.bg-2');
+  const blur  = document.querySelector('.blur-layer');
+  const copy  = document.querySelector('.copy');
+
+  function onScroll() {
+    const rect      = panel.getBoundingClientRect();
+    const viewportH = window.innerHeight;
+    const maxScroll = panel.offsetHeight - viewportH;
+
+    // how far we’ve scrolled through this panel (0 → 1)
+    const raw = Math.min(Math.max(-rect.top, 0), maxScroll);
+    const t   = maxScroll > 0 ? raw / maxScroll : 0;
+
+    // phase 1: 0 → 0.5  ⇒ fade bg1 → bg2
+    const fadePhase = Math.min(t * 2, 1);
+    bg1.style.opacity = 1 - fadePhase;
+    bg2.style.opacity = fadePhase;
+
+    // phase 2: 0.5 → 1  ⇒ blur + text slide
+    const textPhase = Math.max((t - 0.5) * 2, 0); // 0 at 0.5, 1 at 1
+
+    const blurAmount = 0 + 12 * textPhase; // 0 → 12px
+    blur.style.backdropFilter = `blur(${blurAmount}px)`;
+    blur.style.backgroundColor = `rgba(255,255,255,${0.35 * textPhase})`;
+
+    // text position: start above center → settle at center
+    const startOffset = -120;  // percentage of viewport height above center
+    const endOffset   = -50;   // around centered
+    const currentOffset = startOffset + (endOffset - startOffset) * textPhase;
+    copy.style.transform = `translate3d(-50%, ${currentOffset}%, 0)`;
+    copy.style.opacity   = textPhase;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll(); // initial
+</script>
+
+
+</html>

@@ -1,0 +1,122 @@
+@import url("/assets/branding.css");
+
+:root {
+    color-scheme: light dark;
+}
+
+body {
+    margin: 0;
+    font-family: var(--vibe-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+    background: #f5f6f8;
+    color: #1f2933;
+}
+
+.site-header {
+    padding: 2.5rem 2rem 1.5rem;
+    background: linear-gradient(130deg, var(--vibe-accent-strong, #4C51BF) 0%, var(--vibe-accent-color, #6366F1) 100%);
+    color: var(--vibe-accent-foreground, #FFFFFF);
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    box-shadow: 0 35px 65px rgba(15, 23, 42, 0.28);
+}
+
+.brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.brand-logo {
+    width: 62px;
+    height: 62px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 15px 35px rgba(15, 23, 42, 0.3);
+}
+
+.brand-logo[hidden] {
+    display: none;
+}
+
+.brand-eyebrow {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    opacity: 0.8;
+}
+
+.brand-title {
+    margin: 0;
+    font-size: clamp(2.2rem, 4vw, 2.9rem);
+    font-weight: 700;
+    color: inherit;
+}
+
+.site-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+}
+
+.site-header nav a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+    opacity: 0.85;
+}
+
+.site-header nav a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.site-main {
+    max-width: 1100px;
+    margin: -2rem auto 0;
+    padding: 0 2rem 2.5rem;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 2fr 1fr;
+}
+
+.site-main .post {
+    grid-column: 1;
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.09);
+}
+
+.site-sidebar {
+    grid-column: 2;
+    background: white;
+    border-radius: 24px;
+    padding: 1.75rem;
+    box-shadow: 0 25px 65px rgba(15, 23, 42, 0.08);
+    border: 1px solid var(--vibe-accent-muted, #E8EAF6);
+}
+
+.site-footer {
+    text-align: center;
+    padding: 2rem;
+    background: #0f172a;
+    color: #f9fafb;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 960px) {
+    .site-main {
+        grid-template-columns: 1fr;
+    }
+
+    .site-sidebar,
+    .site-main .post {
+        grid-column: 1;
+    }
+}

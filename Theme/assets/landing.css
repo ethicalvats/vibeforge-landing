@@ -1,0 +1,242 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    background: #fff;
+  }
+
+  /* section.fullscreen {
+    height:100vh;
+    width:100vw;
+    position:relative;
+    color:black;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+  }
+  .bg {
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    z-index:-1;
+  }
+  h1 {
+    font-size:72px;
+    font-weight:700;
+    margin-bottom:16px;
+    margin-top: 0px;
+  }
+  p.subtitle {
+    font-size:28px;
+    max-width:800px;
+    margin:auto;
+    font-weight:400;
+    color:#333;
+  }
+  /* Offer section */
+  .offer {
+    background:white;
+    color:black;
+    padding:100px 20px;
+    text-align:center;
+  }
+  .offer .price {
+    font-size:120px;
+    font-weight:800;
+    color:#f7c400; /* bright yellow */
+  }
+  .offer .strike {
+    font-size:32px;
+    color:#aaa;
+    text-decoration:line-through;
+  }
+  .offer .badge {
+    font-size:22px;
+    color:white;
+    background:#e63946; /* red badge */
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:40px;
+    margin-top:10px;
+  }
+  /* Slide unlock */
+  .unlock {
+    background:white;
+    padding:100px 20px;
+    text-align:center;
+  }
+  .slider {
+    width:70%;
+    height:60px;
+    border-radius:100px;
+    background:#eee;
+    margin:auto;
+    position:relative;
+    overflow:hidden;
+  }
+  .slider::before {
+    content:"SLIDE TO UNLOCK EARLY ACCESS";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    font-size:18px;
+    color:#555;
+  }
+  /* Sweet talk */
+  .sweet {
+    background:white;
+    padding:120px 20px;
+    text-align:center;
+  }
+  .sweet h2 {
+    font-size:48px;
+    margin-bottom:20px;
+  }
+  .sweet ul {
+    list-style:none;
+    padding:0;
+    font-size:22px;
+    line-height:1.8;
+  }
+  .sweet li:before {
+    content:"✔︎ ";
+    color:#0c7a26;
+  }
+  /* Vibekit */
+  .vibekit {
+    background:white;
+    padding:120px 20px;
+    text-align:center;
+  }
+  .footer {
+    background:#f5f5f7;
+    padding:40px;
+    text-align:left;
+    font-size:14px;
+    color:#666;
+  }
+
+  /* text overlay fix */
+
+  /* section.fullscreen {
+  position: relative;
+  overflow: hidden;
+}
+
+section.fullscreen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(0,0,0,0.05) 0%,
+    rgba(0,0,0,0.1) 45%,
+    rgba(0,0,0,0.15) 100%
+  );
+  z-index: 0; /* sits above bg, below text */
+/* } */ 
+
+/* make sure your .bg stays behind the overlay */
+/* section.fullscreen .bg {
+  z-index: -1;
+} */
+
+/* .fullscreen h1 { color: #fff; }
+.fullscreen p.subtitle { color: rgba(255,255,255,0.85); }
+
+.fullscreen h1,
+.fullscreen p.subtitle {
+  color: #fff;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.55);
+}
+
+.fullscreen .bg + div {
+  display: inline-block;
+  height:100vh;
+  width: 100vw;
+  
+  background: rgba(255,255,255,0.01); /* softer, airy */
+  /* backdrop-filter: blur(4px) saturate(140%); silky, not frosty */
+  
+  /* border: 1px solid rgba(255,255,255,0.05); very soft */
+  /* border-radius: 32px; larger = softer */
+
+  /* box-shadow: */
+    /* 0 8px 32px rgba(0,0,0,0.15),      ambient drop */
+    /* 0 0 1px rgba(255,255,255,0.5) inset; feather highlight */
+
+    /* mask-image: radial-gradient(circle, black 70%, transparent 100%); */
+/* }  */
+
+/* scroll sync slide */
+
+/* we give the panel 300vh so there's room to scroll */
+  section#vibe-panel {
+    position: relative;
+    height: 300vh;
+  }
+
+  /* fullscreen backgrounds */
+  .bg {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    will-change: opacity;
+    transition: opacity 0.1s linear; /* keeps it smooth on low FPS */
+  }
+
+  .bg-1 {
+    background-image: url('/assets/images/new-project.jpeg'); /* your first screenshot */
+    opacity: 1;
+  }
+
+  .bg-2 {
+    background-image: url('/assets/images/editor-in-action.jpeg'); /* your second screenshot */
+    opacity: 0;
+  }
+
+  /* blur overlay for second phase */
+  .blur-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(4px);
+    will-change: backdrop-filter, background-color;
+  }
+
+  /* text block */
+  .copy {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -120%, 0); /* start above */
+    text-align: center;
+    color: #111;
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  .copy h1 {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 700;
+    margin: 0 0 12px;
+  }
+
+  .copy p {
+    font-size: clamp(18px, 2.4vw, 26px);
+    max-width: 640px;
+    margin: 0 auto;
+    color: #333;
+  }
+
+  /* extra space after the section so you can scroll past it */
+  .spacer {
+    height: 100vh;
+    background: #fff;
+  }
