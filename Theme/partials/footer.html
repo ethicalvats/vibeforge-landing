@@ -7,45 +7,464 @@
 </body>
 
 <script>
-  const panel = document.getElementById('vibe-panel');
-  const bg1   = document.querySelector('.bg-1');
-  const bg2   = document.querySelector('.bg-2');
-  const blur  = document.querySelector('.blur-layer');
-  const copy  = document.querySelector('.copy');
 
-  function onScroll() {
-    const rect      = panel.getBoundingClientRect();
-    const viewportH = window.innerHeight;
-    const maxScroll = panel.offsetHeight - viewportH;
+const story     = document.getElementById('story');
+const slides    = document.querySelectorAll('.slide');
+const copies    = document.querySelectorAll('.copy');
+const bgs       = document.querySelectorAll('.bg-img');
+const blurLayer = document.querySelector('.blur-layer');
 
-    // how far we’ve scrolled through this panel (0 → 1)
-    const raw = Math.min(Math.max(-rect.top, 0), maxScroll);
-    const t   = maxScroll > 0 ? raw / maxScroll : 0;
+const slideCount = slides.length;
 
-    // phase 1: 0 → 0.5  ⇒ fade bg1 → bg2
-    const fadePhase = Math.min(t * 2, 1);
-    bg1.style.opacity = 1 - fadePhase;
-    bg2.style.opacity = fadePhase;
+function clamp(v, min, max) {
+  return v < min ? min : v > max ? max : v;
+}
 
-    // phase 2: 0.5 → 1  ⇒ blur + text slide
-    const textPhase = Math.max((t - 0.5) * 2, 0); // 0 at 0.5, 1 at 1
+function smoothstep(t) {
+  return t * t * (3 - 2 * t);
+}
 
-    const blurAmount = 0 + 12 * textPhase; // 0 → 12px
-    blur.style.backdropFilter = `blur(${blurAmount}px)`;
-    blur.style.backgroundColor = `rgba(255,255,255,${0.35 * textPhase})`;
+const PHASES = {
+  // 0.00–0.15 : crossfade prev → current  (50% slower than before)
+  CROSS_END:     0.15,
 
-    // text position: start above center → settle at center
-    const startOffset = -120;  // percentage of viewport height above center
-    const endOffset   = -50;   // around centered
-    const currentOffset = startOffset + (endOffset - startOffset) * textPhase;
-    copy.style.transform = `translate3d(-50%, ${currentOffset}%, 0)`;
-    copy.style.opacity   = textPhase;
+  // 0.15–0.35 : image-only zoom-in & hold (still ~20% of timeline)
+  ZOOM_END:      0.35,
+
+  // 0.35–0.45 : blur-in
+  BLUR_IN_END:   0.45,
+
+  // 0.45–0.65 : text fade-in (≈30% slower, more time to ease)
+  TEXT_IN_END:   0.65,
+
+  // 0.65–0.90 : text hold (longer frozen state)
+  TEXT_HOLD_END: 0.90,
+
+  // 0.90–0.97 : text fade-out (quick exit)
+  TEXT_OUT_END:  0.97,
+
+  // 0.97–1.00 : blur + zoom fully out, ready for next cross
+  CLEAN_END:     1.00
+};
+
+let ticking = false;
+
+function updateStoryAnimations() {
+  ticking = false;
+
+  // 1) let hero have the stage first
+  const heroVisible = updateHeroStage();
+  if (heroVisible) {
+    // Do NOT run story logic yet
+    return;
   }
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  onScroll(); // initial
+  const viewportH   = window.innerHeight;
+  const rect        = story.getBoundingClientRect();
+  const totalHeight = story.offsetHeight - viewportH;
+
+  const scrolled = clamp(-rect.top, 0, totalHeight);
+  const tGlobal  = totalHeight > 0 ? scrolled / totalHeight : 0; // 0–1 over whole story
+
+  // Map global progress to "which slide" and "where in slide"
+  const slidePos = tGlobal * slideCount;               // 0..slideCount
+  let active     = Math.floor(slidePos);               // 0..slideCount-1
+  active         = clamp(active, 0, slideCount - 1);
+
+  const localRaw = slidePos - active;                  // 0..1 within active slide
+  const u        = clamp(localRaw, 0, 1);              // master slider for this slide
+
+  // ---------- TEXT (only active slide has text) ----------
+
+  let maxTextOpacity = 0;
+
+  slides.forEach((slide, i) => {
+    let opacity = 0;
+    let translateY = -120;
+
+    if (i === active) {
+      const p = u;
+
+      if (p <= PHASES.BLUR_IN_END || p >= PHASES.CLEAN_END) {
+        // before blur-in or after cleanup → no text
+        opacity = 0;
+      } else if (p < PHASES.TEXT_IN_END) {
+        // text-in
+        const t = (p - PHASES.BLUR_IN_END) /
+                  (PHASES.TEXT_IN_END - PHASES.BLUR_IN_END);
+        const e = smoothstep(clamp(t, 0, 1));
+        opacity = e;
+        translateY = -120 + (-50 + 120) * e;  // from above to center
+      } else if (p < PHASES.TEXT_HOLD_END) {
+        // text-hold
+        opacity = 1;
+        translateY = -50;
+      } else if (p < PHASES.TEXT_OUT_END) {
+        // text-out
+        const t = (p - PHASES.TEXT_HOLD_END) /
+                  (PHASES.TEXT_OUT_END - PHASES.TEXT_HOLD_END);
+        const e = smoothstep(clamp(t, 0, 1));
+        opacity = 1 - e;
+        translateY = -50 + (-140 + 50) * e;   // move up and away
+      } else {
+        opacity = 0;
+      }
+    }
+
+    copies[i].style.opacity   = opacity;
+    copies[i].style.transform = `translate3d(-50%, ${translateY}%, 0)`;
+
+    if (opacity > maxTextOpacity) maxTextOpacity = opacity;
+  });
+
+  // ---------- BACKGROUND IMAGES (cross + zoom) ----------
+
+  bgs.forEach(bg => {
+    bg.style.opacity   = 0;
+    bg.style.transform = 'scale(1)';
+  });
+
+  const current = active;
+  const prev    = active - 1;
+
+  let opacityPrev = 0;
+  let opacityCur  = 1;
+  let scaleCur    = 1;
+  const p = u;
+
+  if (prev >= 0) {
+    // 1) crossfade prev → current in [0, CROSS_END]
+    if (p < PHASES.CROSS_END) {
+      const t = p / PHASES.CROSS_END;
+      const e = smoothstep(clamp(t, 0, 1));
+      opacityPrev = 1 - e;
+      opacityCur  = e;
+    } else {
+      opacityPrev = 0;
+      opacityCur  = 1;
+    }
+  } else {
+    // first slide: just fade current in as we enter its segment
+    opacityPrev = 0;
+    opacityCur  = 1;
+  }
+
+  // 2) zoom-in + hold (image-only) in [CROSS_END, ZOOM_END]
+  if (p >= PHASES.CROSS_END && p < PHASES.ZOOM_END) {
+    const t = (p - PHASES.CROSS_END) /
+              (PHASES.ZOOM_END - PHASES.CROSS_END);
+    const e = smoothstep(clamp(t, 0, 1));
+    scaleCur = 1 + 0.02 * e; // up to +2% zoom
+  } else if (p >= PHASES.ZOOM_END && p < PHASES.TEXT_OUT_END) {
+    // hold zoom during blur/text in/hold/out
+    scaleCur = 1 + 0.02;
+  } else if (p >= PHASES.TEXT_OUT_END && p < PHASES.CLEAN_END) {
+    // zoom-out in [TEXT_OUT_END, CLEAN_END]
+    const t = (p - PHASES.TEXT_OUT_END) /
+              (PHASES.CLEAN_END - PHASES.TEXT_OUT_END);
+    const e = smoothstep(clamp(t, 0, 1));
+    scaleCur = 1 + 0.02 * (1 - e);
+  } else {
+    scaleCur = 1;
+  }
+
+  if (prev >= 0) {
+    bgs[prev].style.opacity = opacityPrev;
+  }
+  bgs[current].style.opacity   = opacityCur;
+  bgs[current].style.transform = `scale(${scaleCur})`;
+
+  // ---------- BLUR ----------
+
+  let blurStrength = 0;
+
+  if (p >= PHASES.ZOOM_END && p < PHASES.BLUR_IN_END) {
+    // blur-in
+    const t = (p - PHASES.ZOOM_END) /
+              (PHASES.BLUR_IN_END - PHASES.ZOOM_END);
+    blurStrength = 8 * smoothstep(clamp(t, 0, 1));
+  } else if (p >= PHASES.BLUR_IN_END && p < PHASES.TEXT_OUT_END) {
+    // blur stays while text visible
+    blurStrength = 8;
+  } else if (p >= PHASES.TEXT_OUT_END && p < PHASES.CLEAN_END) {
+    // blur-out
+    const t = (p - PHASES.TEXT_OUT_END) /
+              (PHASES.CLEAN_END - PHASES.TEXT_OUT_END);
+    blurStrength = 8 * (1 - smoothstep(clamp(t, 0, 1)));
+  } else {
+    blurStrength = 0;
+  }
+
+  blurLayer.style.backdropFilter  = `blur(${blurStrength}px)`;
+  blurLayer.style.backgroundColor = 'transparent';
+}
+
+
+
+
+
+
+
+
+const hero     = document.getElementById('hero');
+const heroBg   = document.querySelector('.hero-bg');
+const heroCopy = document.querySelector('.hero-copy');
+
+// returns true if hero is still visible
+function updateHeroStage() {
+  if (!hero) return false;
+
+  const rect      = hero.getBoundingClientRect();
+  const viewportH = window.innerHeight;
+
+  // progress: 0 = hero at original position, 1 = hero scrolled completely off top
+  const heroHeight = rect.height || viewportH;
+  const progress   = clamp(-rect.top / heroHeight, 0, 1);
+
+  const heroAlpha  = 1 - progress;
+
+  if (heroBg) {
+    heroBg.style.opacity = heroAlpha;
+  }
+  if (heroCopy) {
+    heroCopy.style.opacity = heroAlpha;
+    heroCopy.style.transform =
+      `translate(-50%, ${-50 - progress * 20}%)`;
+  }
+
+  // Crossfade hero background → first slide background
+  const firstBg = bgs[0];
+  if (firstBg) {
+    firstBg.style.opacity   = progress; // hero 1→0, first bg 0→1
+    firstBg.style.transform = 'scale(1)'; // keep neutral until story takes over
+  }
+
+  const heroVisible = rect.bottom > 0; // still overlapping viewport?
+
+  if (heroVisible) {
+    // While hero visible, keep story text/blur off so they don't interfere
+    copies.forEach(c => {
+      c.style.opacity = 0;
+    });
+    blurLayer.style.backdropFilter  = 'blur(0px)';
+    blurLayer.style.backgroundColor = 'transparent';
+  }
+
+  return heroVisible;
+}
+
+
+
+
+
+
+
+
+const offer        = document.getElementById('offer');
+const offerLayer   = document.querySelector('.offer-layer');
+const offerHeadline = document.querySelector('.offer-headline');
+const offerSection  = document.querySelector('#offer .offer');
+const unlockSection = document.querySelector('#offer .unlock');
+
+
+function updateOfferScene() {
+  if (!offer || !offerLayer || !offerHeadline || !offerSection || !unlockSection) return;
+
+  const viewportH = window.innerHeight;
+  const rect      = offer.getBoundingClientRect();
+  const total     = offer.offsetHeight - viewportH;
+
+  if (total <= 0) {
+    // not enough height, just show static
+    offerLayer.style.position = 'relative';
+    return;
+  }
+
+  const scrolled = clamp(-rect.top, 0, total);
+  const u        = total > 0 ? scrolled / total : 0;   // 0 → 1 over offer section
+
+  // ---------- 1) HEADLINE: fade in then fade out ----------
+
+  let headOpacity = 0;
+  let headY       = 20;
+
+  if (u < 0.3) {
+    // 0.00–0.15 fade in, 0.15–0.30 fade out
+    const t = u / 0.3; // 0..1
+    if (t < 0.5) {
+      const p = t / 0.5;          // 0..1
+      const e = smoothstep(p);
+      headOpacity = e;
+      headY       = 20 - 20 * e;
+    } else {
+      const p = (t - 0.5) / 0.5;  // 0..1
+      const e = smoothstep(p);
+      headOpacity = 1 - e;
+      headY       = 0 - 20 * e;
+    }
+  } else {
+    headOpacity = 0;
+    headY       = -20;
+  }
+
+  offerHeadline.style.opacity   = headOpacity;
+  offerHeadline.style.transform = `translateY(${headY}px)`;
+
+  // ---------- 2) PRICE HAMMER DROP ----------
+
+  let priceOpacity = 0;
+  let priceY       = -60;  // in vh for big movement
+
+  if (u < 0.3) {
+    priceOpacity = 0;
+    priceY       = -60;
+  } else if (u < 0.5) {
+    // 0.30–0.50: drop with slight overshoot
+    const t = (u - 0.3) / 0.2;       // 0..1
+    const e = 1 - Math.pow(1 - t, 3); // ease-out
+
+    priceOpacity = 1;
+
+    const base   = -60 * (1 - e);      // -60vh → 0
+    const bounce = -4 * Math.sin(t * Math.PI); // small overshoot
+
+    priceY = base + bounce;
+  } else if (u < 0.8) {
+    // 0.50–0.80: hold in place
+    priceOpacity = 1;
+    priceY       = 0;
+  } else {
+    // 0.80–1.00: move up and out as we exit offer
+    const t = (u - 0.8) / 0.2;   // 0..1
+    const e = smoothstep(t);
+    priceOpacity = 1;
+    priceY       = -40 * e;      // slide up a bit while leaving
+  }
+
+  offerSection.style.opacity   = priceOpacity;
+  offerSection.style.transform = `translateY(${priceY}vh)`;
+
+  // ---------- 3) UNLOCK SLIDER APPEAR ----------
+
+  let unlockOpacity = 0;
+  let unlockY       = 40;
+
+  if (u < 0.5) {
+    unlockOpacity = 0;
+    unlockY       = 40;
+  } else if (u < 0.8) {
+    // 0.50–0.80: slide in from below
+    const t = (u - 0.5) / 0.3;   // 0..1
+    const e = smoothstep(t);
+    unlockOpacity = e;
+    unlockY       = 40 - 40 * e; // 40vh -> 0
+  } else {
+    // 0.80–1.00: move up with price
+    const t = (u - 0.8) / 0.2;
+    const e = smoothstep(t);
+    unlockOpacity = 1;
+    unlockY       = 0 - 40 * e;  // 0 -> -40vh
+  }
+
+  unlockSection.style.opacity   = unlockOpacity;
+  unlockSection.style.transform = `translateY(${unlockY}vh)`;
+
+  // ---------- 4) Layer visibility ----------
+
+  // Once we've fully scrolled past the offer scene, hide the fixed layer
+  if (u >= 1) {
+    offerLayer.style.display = 'none';
+  } else {
+    offerLayer.style.display = 'flex';
+  }
+}
+
+
+
+
+
+
+
+
+
+
+// 0.5 = slower, heavier, more cinematic
+// 1.0 = baseline
+// 1.5 = snappy, responsive
+const RESPONSIVENESS = 0.3;
+
+// internal state
+let targetScrollY = window.scrollY;
+
+// derived from RESPONSIVENESS
+// - how much each wheel tick moves the "virtual scroll"
+// - how quickly the page catches up
+const SCROLL_SCALE = RESPONSIVENESS;      // lower => more scroll needed per slide
+const BASE_SMOOTH  = 0.18;                // base lerp factor
+const SMOOTHING    = clamp(
+  BASE_SMOOTH + (RESPONSIVENESS - 1.0) * 0.10,
+  0.05,
+  0.35
+);
+
+// intercept wheel and convert to targetScrollY
+window.addEventListener(
+  'wheel',
+  (e) => {
+    // stop the browser from applying its own scroll
+    e.preventDefault();
+
+    const delta    = e.deltaY * SCROLL_SCALE;
+
+
+    targetScrollY = Math.max(
+      0,
+      targetScrollY + delta
+    );
+  },
+  { passive: false }
+);
+
+
+
+
+
+
+
+// smooth driver that moves real scroll toward targetScrollY
+function driveSmoothScroll() {
+  const current = window.scrollY;
+  const diff    = targetScrollY - current;
+
+  if (Math.abs(diff) > 0.5) {
+    const next = current + diff * SMOOTHING;
+    window.scrollTo(0, next);
+  }
+
+  requestAnimationFrame(driveSmoothScroll);
+}
+driveSmoothScroll();
+
+function onScrollAll() {
+  if (!ticking) {
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+
+      // hero stage (may early-return story)
+      updateStoryAnimations();
+
+      // offer price always updated (independent of hero/story)
+      updateOfferScene();
+    });
+  }
+}
+
+window.addEventListener('scroll', onScrollAll, { passive: true });
+window.addEventListener('resize', onScrollAll);
+onScrollAll(); // initial layout
+
+
+
 </script>
-
-
 </html>

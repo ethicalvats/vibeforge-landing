@@ -1,242 +1,316 @@
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
-    background: #fff;
-  }
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  background: transparent;
+}
 
-  /* section.fullscreen {
-    height:100vh;
-    width:100vw;
-    position:relative;
-    color:black;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-  }
-  .bg {
-    position:absolute;
-    inset:0;
-    background-size:cover;
-    background-position:center;
-    z-index:-1;
-  }
-  h1 {
-    font-size:72px;
-    font-weight:700;
-    margin-bottom:16px;
-    margin-top: 0px;
-  }
-  p.subtitle {
-    font-size:28px;
-    max-width:800px;
-    margin:auto;
-    font-weight:400;
-    color:#333;
-  }
-  /* Offer section */
-  .offer {
-    background:white;
-    color:black;
-    padding:100px 20px;
-    text-align:center;
-  }
-  .offer .price {
-    font-size:120px;
-    font-weight:800;
-    color:#f7c400; /* bright yellow */
-  }
-  .offer .strike {
-    font-size:32px;
-    color:#aaa;
-    text-decoration:line-through;
-  }
-  .offer .badge {
-    font-size:22px;
-    color:white;
-    background:#e63946; /* red badge */
-    display:inline-block;
-    padding:8px 18px;
-    border-radius:40px;
-    margin-top:10px;
-  }
-  /* Slide unlock */
-  .unlock {
-    background:white;
-    padding:100px 20px;
-    text-align:center;
-  }
-  .slider {
-    width:70%;
-    height:60px;
-    border-radius:100px;
-    background:#eee;
-    margin:auto;
-    position:relative;
-    overflow:hidden;
-  }
-  .slider::before {
-    content:"SLIDE TO UNLOCK EARLY ACCESS";
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%, -50%);
-    font-size:18px;
-    color:#555;
-  }
-  /* Sweet talk */
-  .sweet {
-    background:white;
-    padding:120px 20px;
-    text-align:center;
-  }
-  .sweet h2 {
-    font-size:48px;
-    margin-bottom:20px;
-  }
-  .sweet ul {
-    list-style:none;
-    padding:0;
-    font-size:22px;
-    line-height:1.8;
-  }
-  .sweet li:before {
-    content:"✔︎ ";
-    color:#0c7a26;
-  }
-  /* Vibekit */
-  .vibekit {
-    background:white;
-    padding:120px 20px;
-    text-align:center;
-  }
-  .footer {
-    background:#f5f5f7;
-    padding:40px;
-    text-align:left;
-    font-size:14px;
-    color:#666;
-  }
+/* Offer section */
 
-  /* text overlay fix */
+#offer {
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 64px 16px;
+}
 
-  /* section.fullscreen {
+
+.offer {
+  background: white;
+  color: black;
+  padding: 100px 20px;
+  text-align: center;
+  display: inline-block;   /* ensure transform is clean */
+  will-change: transform;
+}
+
+/* Offer scene container: tall so we have scroll space */
+#offer {
+  position: relative;
+  min-height: 200vh;          /* 2 viewport heights to play the scene */
+  background: #f5f5f7;        /* Apple gray */
+}
+
+/* The animated layer that "pins" during the offer scroll */
+.offer-layer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f7;
+  text-align: center;
+  pointer-events: none;       /* let inner sections be non-interactive if needed */
+  z-index: -5
+}
+
+/* Headline text */
+.offer-headline {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}
+
+/* Price block (hammer) */
+.offer {
+  opacity: 0;
+  transform: translateY(-60vh);  /* start off-screen above */
+  will-change: opacity, transform;
+  position:relative;
+  z-index: -4;
+}
+
+/* Unlock slider below the price */
+.unlock {
+  margin-top: 40px;
+  opacity: 0;
+  transform: translateY(40vh);   /* start off-screen below */
+  will-change: opacity, transform;
+}
+
+/* keep your existing .offer/.price/.strike/.badge/.slider styles */
+
+
+.offer .price {
+  font-size: 120px;
+  font-weight: 800;
+  color: #f7c400;
+  /* bright yellow */
+}
+
+.offer .strike {
+  font-size: 32px;
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.offer .badge {
+  font-size: 22px;
+  color: white;
+  background: #e63946;
+  /* red badge */
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 40px;
+  margin-top: 10px;
+}
+
+#after-offer {
+  height: 60vh;
+  background: #fff;
+}
+
+/* Slide unlock */
+.unlock {
+  background: white;
+  padding: 100px 20px;
+  text-align: center;
+  width: 40%;
+}
+
+.slider {
+  height: 60px;
+  border-radius: 100px;
+  background: #eee;
+  margin: auto;
   position: relative;
   overflow: hidden;
 }
 
-section.fullscreen::before {
-  content: "";
+.slider::before {
+  content: "SLIDE TO UNLOCK EARLY ACCESS";
   position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at center,
-    rgba(0,0,0,0.05) 0%,
-    rgba(0,0,0,0.1) 45%,
-    rgba(0,0,0,0.15) 100%
-  );
-  z-index: 0; /* sits above bg, below text */
-/* } */ 
-
-/* make sure your .bg stays behind the overlay */
-/* section.fullscreen .bg {
-  z-index: -1;
-} */
-
-/* .fullscreen h1 { color: #fff; }
-.fullscreen p.subtitle { color: rgba(255,255,255,0.85); }
-
-.fullscreen h1,
-.fullscreen p.subtitle {
-  color: #fff;
-  text-shadow: 0 4px 10px rgba(0,0,0,0.55);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: #555;
 }
 
-.fullscreen .bg + div {
-  display: inline-block;
-  height:100vh;
-  width: 100vw;
-  
-  background: rgba(255,255,255,0.01); /* softer, airy */
-  /* backdrop-filter: blur(4px) saturate(140%); silky, not frosty */
-  
-  /* border: 1px solid rgba(255,255,255,0.05); very soft */
-  /* border-radius: 32px; larger = softer */
+/* Sweet talk */
+.sweet {
+  background: white;
+  padding: 120px 20px;
+  text-align: center;
+  min-height: 100vh;
+}
 
-  /* box-shadow: */
-    /* 0 8px 32px rgba(0,0,0,0.15),      ambient drop */
-    /* 0 0 1px rgba(255,255,255,0.5) inset; feather highlight */
+.sweet h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
 
-    /* mask-image: radial-gradient(circle, black 70%, transparent 100%); */
-/* }  */
+.sweet ul {
+  list-style: none;
+  padding: 0;
+  font-size: 22px;
+  line-height: 1.8;
+}
+
+.sweet li:before {
+  content: "✔︎ ";
+  color: #0c7a26;
+}
+
+/* Vibekit */
+.vibekit {
+  background: white;
+  padding: 120px 20px;
+  text-align: center;
+  min-height: 40vh;
+}
+
+.footer {
+  background: #f5f5f7;
+  padding: 40px;
+  text-align: left;
+  font-size: 14px;
+  color: #666;
+}
+
 
 /* scroll sync slide */
 
-/* we give the panel 300vh so there's room to scroll */
-  section#vibe-panel {
-    position: relative;
-    height: 300vh;
-  }
+/* ---------- STORY CONTAINER ---------- */
 
-  /* fullscreen backgrounds */
-  .bg {
-    position: fixed;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    will-change: opacity;
-    transition: opacity 0.1s linear; /* keeps it smooth on low FPS */
-  }
+#story {
+  position: relative;
+  background: transparent;
+  /* <<< dark base just for the scroll story */
+  color: #fff;
+}
 
-  .bg-1 {
-    background-image: url('/assets/images/new-project.jpeg'); /* your first screenshot */
-    opacity: 1;
-  }
+.slide {
+  height: 140vh;
+  /* gives room for in/out animation */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
-  .bg-2 {
-    background-image: url('/assets/images/editor-in-action.jpeg'); /* your second screenshot */
-    opacity: 0;
-  }
+.slide-inner {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
 
-  /* blur overlay for second phase */
-  .blur-layer {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: rgba(255,255,255,0.1);
-    backdrop-filter: blur(4px);
-    will-change: backdrop-filter, background-color;
-  }
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  /* <<< slightly behind hero & blur */
+  background: transparent;
+  /* <<< black fill underneath images */
+}
 
-  /* text block */
-  .copy {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate3d(-50%, -120%, 0); /* start above */
-    text-align: center;
-    color: #111;
-    opacity: 0;
-    will-change: transform, opacity;
-  }
+.bg-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  will-change: opacity, transform; /* <<< add transform */
+   transform-origin: center center;
+}
 
-  .copy h1 {
-    font-size: clamp(40px, 6vw, 72px);
-    font-weight: 700;
-    margin: 0 0 12px;
-  }
+/* blur overlay shared by all slides */
+.blur-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: transparent;
+  backdrop-filter: blur(0px);
+  z-index: -1;
+  will-change: backdrop-filter, background-color;
+}
 
-  .copy p {
-    font-size: clamp(18px, 2.4vw, 26px);
-    max-width: 640px;
-    margin: 0 auto;
-    color: #333;
-  }
+/* text block for each slide */
+.copy {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -120%, 0);
+  /* start above */
+  text-align: center;
+  color: #fff;
+  /* <<< bright white */
+  opacity: 0;
+  will-change: transform, opacity;
+  padding: 0 24px;
+  text-shadow:
+    0 0 10px rgba(0, 0, 0, 0.9),
+    0 4px 24px rgba(0, 0, 0, 0.85);
+  /* <<< strong glow for busy images */
+}
 
-  /* extra space after the section so you can scroll past it */
-  .spacer {
-    height: 100vh;
-    background: #fff;
-  }
+.copy h1 {
+  margin: 0 0 16px;
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 700;
+}
+
+.copy p {
+  margin: 0 auto;
+  max-width: 720px;
+  font-size: clamp(18px, 2.3vw, 26px);
+  color: rgba(255, 255, 255, 0.9);
+  /* <<< slightly softer white */
+}
+
+
+/* full-viewport hero */
+#hero {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* hero background stuck to the viewport */
+.hero-bg {
+  position: fixed;
+  /* <<< key change: fixed, not absolute */
+  inset: 0;
+  background-image: url('/assets/images/launch.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  will-change: opacity;
+  /* sits above bg-layer(-3) and below blur(-1) & text */
+  z-index: -2; /* bg-img: -2, blur-layer: -1, text above 0 */
+}
+
+/* keep hero text above everything */
+.hero-copy {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #111;
+  will-change: opacity, transform;
+  z-index: 0;
+}
+
+.hero-copy h1 {
+  margin: 0 0 12px;
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 700;
+}
+
+.hero-copy p {
+  font-size: clamp(20px, 3vw, 28px);
+  color: #444;
+  margin: 0;
+}
