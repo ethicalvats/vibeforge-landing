@@ -1,0 +1,102 @@
+<section class="section">
+  <div class="container">
+    <span class="glyph glyph-small" aria-hidden="true"></span>
+    <p class="eyebrow">Framework</p>
+    <h1>Vibekit — Things, Changes, States.</h1>
+    <p class="lead">Maker Studio is powered by Vibekit. Build from the CLI, ship from the app, or mix both. It’s the event-driven heart of the Path.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container card">
+    <h3>Core pattern</h3>
+    <div class="diagram">
+      <span class="diagram-node">Things</span>
+      <span class="diagram-node">Changes (Events)</span>
+      <span class="diagram-node">States</span>
+    </div>
+    <p style="margin-top:16px;">You model what exists (Things), what can happen (Changes), and what it results in (States). Maker Studio outputs the same files you’d craft by hand.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-column">
+    <div>
+      <p class="eyebrow">CLI workflow</p>
+      <h2>Same toolchain, now with a studio UI.</h2>
+      <p class="lead">The CLI you already know sits beneath the glass. The docs shipped with the repo still apply.</p>
+      <pre><code># Create a new site
+vibekit new my-founder-home --template newsletter
+
+# Run local preview
+vibekit serve
+
+# Publish to your configured target
+vibekit publish</code></pre>
+    </div>
+    <div class="card">
+      <h3>Doc highlights</h3>
+      <ul class="rich-list">
+        <li><strong>Getting started</strong> — scaffold + run dev server.</li>
+        <li><strong>Spec reference</strong> — advanced state transitions.</li>
+        <li><strong>Runtime</strong> — snapshots, serve, deploy.</li>
+        <li><strong>Plugin API</strong> — extend your studio with custom plugins.</li>
+        <li><strong>Theming</strong> — partials, assets, posts.</li>
+      </ul>
+      <p class="muted">Documents imported from the original CLI guide now live inside this site.</p>
+      <a class="btn ghost" href="/vibekit/guide/introduction.md">Open the full guide →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container feature-grid">
+    <article class="card feature-card">
+      <h3>Spec</h3>
+      <p>Define Things, Events, Guards, Derived fields. Maker Studio validates them in real time.</p>
+    </article>
+    <article class="card feature-card">
+      <h3>Runtime</h3>
+      <p>Dev server with hot reload, snapshot exports, read-only serve.</p>
+    </article>
+    <article class="card feature-card">
+      <h3>Deployment</h3>
+      <p>SSH, Docker, Google Cloud Run commands built in.</p>
+    </article>
+    <article class="card feature-card">
+      <h3>Theming</h3>
+      <p>Partials, assets, posts, and pages live in `/Theme` just like this site.</p>
+    </article>
+    <article class="card feature-card">
+      <h3>Plugin API</h3>
+      <p>Hooks for OAuth, payments, persistence, automation.</p>
+    </article>
+    <article class="card feature-card">
+      <h3>Advanced</h3>
+      <p>Multi-runtime snapshots, SQLite plugin, limitations doc.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cta-panel">
+    <div>
+      <p class="eyebrow">Community</p>
+      <h3>Join the Vibe Coders Circle.</h3>
+      <p class="muted">A free channel for devs building plugins, automations, and custom deployments on Vibekit.</p>
+    </div>
+    <form class="form-grid" action="/api/community-request" method="post">
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="email" name="email" placeholder="you@vibedev.com" required />
+      <button class="btn solid" type="submit">Request invite</button>
+    </form>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container breadcrumb-teaser">
+    <p class="eyebrow">Next breadcrumb</p>
+    <p><strong>The philosophy behind this pattern lives in the Manifesto.</strong></p>
+    <a class="btn outline" href="/manifesto">Read the Manifesto →</a>
+  </div>
+</section>

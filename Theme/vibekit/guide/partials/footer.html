@@ -1,0 +1,53 @@
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <p>© The Vibepreneur LLC. Built with Vibekit. No cookies. No trackers. Just vibes.</p>
+    </footer>
+
+    <script>
+      (function(){
+        // Highlight active link in left sidebar
+        try {
+          var here = location.pathname.replace(/\/index\.(html|md)$/, "/");
+          document.querySelectorAll(".sidebar a").forEach(function(a){
+            var url = new URL(a.getAttribute("href"), location.origin);
+            if (url.pathname === here) a.classList.add("is-active");
+          });
+        } catch(e){}
+
+        // Build right-hand TOC from H2
+        try {
+          var main = document.querySelector("main.content");
+          var container = document.getElementById("toc");
+          if (!main || !container) return;
+
+          var h2s = Array.prototype.slice.call(main.querySelectorAll("h2"));
+          if (h2s.length === 0) { container.innerHTML = '<div class="muted">No sections</div>'; return; }
+
+          function slugify(text){
+            return text.toLowerCase()
+              .replace(/[^a-z0-9\s-]/g,"")
+              .trim()
+              .replace(/\s+/g,"-")
+              .replace(/-+/g,"-");
+          }
+
+          var ul = document.createElement("ul");
+          h2s.forEach(function(h){
+            var text = h.textContent.trim();
+            if (!h.id) h.id = slugify(text);
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            a.href = "#" + h.id;
+            a.textContent = text;
+            li.appendChild(a);
+            ul.appendChild(li);
+          });
+          container.innerHTML = "";
+          container.appendChild(ul);
+        } catch(e){}
+      })();
+    </script>
+  </body>
+</html>

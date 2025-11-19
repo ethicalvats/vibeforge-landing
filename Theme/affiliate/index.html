@@ -1,0 +1,88 @@
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Affiliates</p>
+    <h1>The tiered affiliate program.</h1>
+    <p class="lead">Aligned with the Path. Depth earns more. Honor the story while you sell.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container tier-grid">
+    <article class="tier-card">
+      <p class="badge-inline">20%</p>
+      <h3>Tier 1 · Public</h3>
+      <p>Open to everyone. Share your link, earn 20% on every referred purchase.</p>
+    </article>
+    <article class="tier-card">
+      <p class="badge-inline">40%</p>
+      <h3>Tier 2 · Maker Studio buyer</h3>
+      <p>Own a license? Connect it and your share upgrades to 40% per sale.</p>
+    </article>
+    <article class="tier-card">
+      <p class="badge-inline">100% + 30%</p>
+      <h3>Tier 3 · Kul member</h3>
+      <p>Kul makers earn 100% of the first payment for each new customer plus 30% of future purchases.</p>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-column">
+    <div class="card">
+      <h3>Dashboard preview</h3>
+      <ul class="rich-list">
+        <li>Tracked clicks + referred orders</li>
+        <li>Commission total + payout threshold</li>
+        <li>Tier status (Public / Buyer / Kul)</li>
+        <li>Basic payout history</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Founder’s expectations</h3>
+      <p class="lead">This is a values-aligned program. You’re not just pushing affiliate codes—you’re inviting makers to a Path.</p>
+      <ul class="rich-list">
+        <li>Tell the truth about who this is for.</li>
+        <li>Use official assets and keep glyph usage on brand.</li>
+        <li>Protect the breadcrumb strategy.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cta-panel">
+    <div>
+      <p class="eyebrow">Apply now</p>
+      <h3>Become a Vibe affiliate.</h3>
+    </div>
+    <form class="form-grid" action="/api/affiliate/apply" method="post">
+      <input type="text" name="name" placeholder="Your name" required />
+      <input type="email" name="email" placeholder="you@studio.com" required />
+      <select name="tier" required>
+        <option value="">Current level</option>
+        <option value="public">Public</option>
+        <option value="buyer">Maker Studio buyer</option>
+        <option value="kul">Kul member</option>
+      </select>
+      <textarea name="plan" placeholder="Tell us how you'll promote" rows="3" required></textarea>
+      <button class="btn solid" type="submit">Submit application</button>
+    </form>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container faq">
+    <article class="faq-item">
+      <h3>How are payouts sent?</h3>
+      <p>Monthly via Stripe or bank transfer.</p>
+    </article>
+    <article class="faq-item">
+      <h3>Can agencies join?</h3>
+      <p>Yes. Agencies + studios can request special dashboards via Kul.</p>
+    </article>
+    <article class="faq-item">
+      <h3>Is attribution last-click?</h3>
+      <p>First-touch within 30 days, with manual review for overlapping campaigns.</p>
+    </article>
+  </div>
+</section>

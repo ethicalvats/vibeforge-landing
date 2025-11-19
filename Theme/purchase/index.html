@@ -1,0 +1,52 @@
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Checkout</p>
+    <h1>Buy VibeMaker Studio.</h1>
+    <p class="lead">$39 one-time (normally $99). Includes 1 founder home, 1 year of hosting/publishing, and 12 months of updates.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container pricing-grid">
+    <article class="plan">
+      <h3>Founder Edition</h3>
+      <div class="price">$39</div>
+      <p class="muted">Early access · One-time license · Mac only</p>
+      <ul>
+        <li>1 founder home (site + blog + changelog + newsletter)</li>
+        <li>1 year of hosting & publishing for your first site</li>
+        <li>Custom domain support</li>
+        <li>All core features & updates for 12 months</li>
+        <li>Access to plugin marketplace as it rolls out</li>
+        <li>Priority bug fixes during early access</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cta-panel">
+    <div>
+      <p class="eyebrow">Stripe Checkout</p>
+      <h3>Complete your purchase.</h3>
+      <p class="muted">You’ll be redirected to Stripe. After payment we email your download + Path breadcrumb.</p>
+    </div>
+    <form class="form-grid" action="/api/checkout" method="post">
+      <input type="text" name="name" placeholder="Full name" required />
+      <input type="email" name="email" placeholder="you@studio.com" required />
+      <input type="hidden" name="plan" value="founder" />
+      <button class="btn solid" type="submit">Pay via Stripe</button>
+    </form>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container card">
+    <h3>After payment</h3>
+    <ul class="rich-list">
+      <li>Download email + license key.</li>
+      <li>Link to this Path page + instructions.</li>
+      <li>Invite to affiliate dashboard.</li>
+    </ul>
+  </div>
+</section>
