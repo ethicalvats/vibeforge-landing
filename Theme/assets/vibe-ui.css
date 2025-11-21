@@ -1,0 +1,149 @@
+
+/*
+  This file defines the base styles for all Vibekit blocks.
+  These styles are designed to be minimal and easily extensible.
+*/
+
+:root {
+  --vk-font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --vk-font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+  --vk-color-text: #333;
+  --vk-color-background: #fff;
+  --vk-color-primary: #007aff;
+  --vk-color-border: #e6e6e6;
+
+  --vk-spacing-unit: 8px;
+}
+
+body {
+  font-family: var(--vk-font-family-sans);
+  color: var(--vk-color-text);
+  background-color: var(--vk-color-background);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 calc(var(--vk-spacing-unit) * 2);
+}
+
+a {
+  color: var(--vk-color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+pre, code {
+  font-family: var(--vk-font-family-mono);
+}
+
+.block {
+  padding: calc(var(--vk-spacing-unit) * 2);
+  border: 1px solid var(--vk-color-border);
+  border-radius: 4px;
+  margin-bottom: calc(var(--vk-spacing-unit) * 2);
+}
+
+:root {
+  --vk-font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --vk-font-mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --vk-color-text: #18181b;
+  --vk-color-muted: #52525b;
+  --vk-color-border: rgba(24, 24, 27, 0.12);
+  --vk-color-divider: rgba(24, 24, 27, 0.18);
+  --vk-spacing-block: 1.25rem;
+  --vk-spacing-paragraph: 0.75rem;
+  --vk-radius: 0.75rem;
+  --vk-shadow-image: 0 12px 40px rgba(15, 23, 42, 0.18);
+}
+
+.vk-block {
+  color: var(--vk-color-text);
+  font-family: var(--vk-font-sans);
+  line-height: 1.6;
+  margin: 0 0 var(--vk-spacing-block);
+}
+
+.vk-block:last-child {
+  margin-bottom: 0;
+}
+
+.vk-block-group {
+  display: grid;
+  gap: var(--vk-spacing-block);
+}
+
+.vk-block--headingTwo {
+  font-size: clamp(1.6rem, 2.4vw + 1rem, 2.35rem);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 0.6em;
+}
+
+.vk-block--paragraph {
+  margin-bottom: var(--vk-spacing-paragraph);
+}
+
+.vk-block--quote {
+  border-left: 4px solid var(--vk-color-border);
+  color: var(--vk-color-muted);
+  font-style: italic;
+  margin: var(--vk-spacing-block) 0;
+  padding-left: 1rem;
+}
+
+.vk-block--bulleted {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.vk-block--bulleted li + li {
+  margin-top: 0.35em;
+}
+
+.vk-block--divider {
+  border: none;
+  border-bottom: 1px solid var(--vk-color-divider);
+  margin: calc(var(--vk-spacing-block) * 1.2) 0;
+}
+
+.vk-block--code {
+  background: rgba(15, 23, 42, 0.05);
+  border-radius: var(--vk-radius);
+  font-family: var(--vk-font-mono);
+  font-size: 0.9rem;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.vk-block--image {
+  margin: calc(var(--vk-spacing-block) * 1.4) 0;
+  text-align: center;
+}
+
+.vk-block--image img {
+  border-radius: var(--vk-radius);
+  box-shadow: var(--vk-shadow-image);
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .vk-block {
+    margin-bottom: calc(var(--vk-spacing-block) * 0.85);
+  }
+
+  .vk-block--headingTwo {
+    margin-bottom: 0.4em;
+  }
+}

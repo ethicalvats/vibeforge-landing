@@ -20,6 +20,15 @@ Thing User {
   role: String @enum(Editor,Author,Moderator)
 }
 
+Thing Page @themePage(directory: pages, slugField: slug, titleField: title) {
+  id: UUID @identity
+  slug: String @required @unique @type(slug) @max(80)
+  title: String @required @max(140)
+  summary: String @max(240)
+  body: Editor @required
+  menuLabel: String? @default("Main")
+}
+
 Event Post.created { id: UUID, slug: String, title: String, body: Text, authorId: UUID, category: String }
 Event Post.updated { id: UUID, title: String, body: Text, category: String }
 Event Post.published { id: UUID, authorId: UUID }
@@ -35,4 +44,3 @@ State PostLifecycle { states: [draft, reviewing, published, archived];
     [state->archived, flagged->true] on Post.flagged guard { moderator.role == "Moderator" };
     [state->archived] on Post.deleted
 }
-

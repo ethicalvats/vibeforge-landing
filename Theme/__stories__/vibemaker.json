@@ -1,0 +1,64 @@
+{
+  "id": "1F5E1B8D-1A8F-4E4A-9A87-B56AEC4AA5F1",
+  "slug": "vibemaker-story",
+  "title": "VibeMaker Studio Story",
+  "intro": "Full-screen scroll story for the landing hero.",
+  "createdAt": "2024-10-10T10:00:00Z",
+  "updatedAt": "2024-10-10T10:00:00Z",
+  "slides": [
+    {
+      "id": "0AA5E1EA-74E3-4C87-9E8C-9FEE65223C1A",
+      "sequence": 0,
+      "headline": "Start Something That's Yours.",
+      "body": "Launch your own apps studio in seconds — right on your Mac.",
+      "backgroundAsset": "/assets/images/new-project.jpeg",
+      "createdAt": "2024-10-10T10:00:00Z",
+      "updatedAt": "2024-10-10T10:00:00Z"
+    },
+    {
+      "id": "9F55295A-4F27-4D4D-A710-2234B8F78876",
+      "sequence": 1,
+      "headline": "Make It Yours.",
+      "body": "Your logo, your colors, your typography. Apps that actually look like your product.",
+      "backgroundAsset": "/assets/images/customize-light.jpeg",
+      "createdAt": "2024-10-10T10:00:00Z",
+      "updatedAt": "2024-10-10T10:00:00Z"
+    },
+    {
+      "id": "3A0C262F-9A53-4AC4-9DB2-BCB6A3ECEF25",
+      "sequence": 2,
+      "headline": "Light or Dark.",
+      "body": "Brand once, see it shine in both modes — powered by the Vibekit theme engine.",
+      "backgroundAsset": "/assets/images/customize-dark.jpeg",
+      "createdAt": "2024-10-10T10:00:00Z",
+      "updatedAt": "2024-10-10T10:00:00Z"
+    },
+    {
+      "id": "41D2F9EE-0791-4682-AE66-77E771E1F544",
+      "sequence": 3,
+      "headline": "From Mac to Web.",
+      "body": "Hit publish, copy your live URL, and share. No extra dashboards, no deployment puzzle.",
+      "backgroundAsset": "/assets/images/publish.jpeg",
+      "createdAt": "2024-10-10T10:00:00Z",
+      "updatedAt": "2024-10-10T10:00:00Z"
+    },
+    {
+      "id": "A3BB3D30-4FFE-4DB0-AC08-4910A6DA22E0",
+      "sequence": 4,
+      "headline": "Write Beautifully.",
+      "body": "A block-based editor that feels native, fast, and alive — with live preview beside your words.",
+      "backgroundAsset": "/assets/images/editor-in-action.jpeg",
+      "createdAt": "2024-10-10T10:00:00Z",
+      "updatedAt": "2024-10-10T10:00:00Z"
+    },
+    {
+      "id": "8D4E8CC7-55D0-4819-9F0F-7B8F110EAF36",
+      "sequence": 5,
+      "headline": "Grow What You Build.",
+      "body": "Plugins, automations, imports, analytics — everything you need to grow a serious audience.",
+      "backgroundAsset": "/assets/images/analytics.jpeg",
+      "createdAt": "2024-10-10T10:00:00Z",
+      "updatedAt": "2024-10-10T10:00:00Z"
+    }
+  ]
+}

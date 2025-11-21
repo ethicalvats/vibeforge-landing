@@ -1,18 +1,18 @@
 :root {
   color-scheme: light dark;
-  --bg: #05060b;
-  --surface: #0f1622;
-  --surface-alt: #101825;
-  --card: #0f172a;
-  --muted: #94a3b8;
-  --line: rgba(148, 163, 184, 0.25);
-  --text: #f8fafc;
-  --accent: #64e1b5;
-  --accent-strong: #b54cff;
-  --accent-soft: rgba(100, 225, 181, 0.08);
-  --warning: #ff9f43;
-  --danger: #f87171;
-  font-family: 'Inter', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --bg: var(--vk-color-bg-canvas, #05060b);
+  --surface: var(--vk-color-bg-surface, #0f1622);
+  --surface-alt: var(--vk-color-bg-elevated, #101825);
+  --card: var(--vk-color-bg-elevated, #0f172a);
+  --muted: var(--vk-color-fg-muted, #94a3b8);
+  --line: var(--vk-color-border-subtle, rgba(148, 163, 184, 0.25));
+  --text: var(--vk-color-fg-primary, #f8fafc);
+  --accent: var(--vk-color-accent-brand, #64e1b5);
+  --accent-strong: color-mix(in srgb, var(--vk-color-accent-brand, #64e1b5) 65%, var(--vk-color-accent-contrast, #0f172a));
+  --accent-soft: color-mix(in srgb, var(--vk-color-accent-brand, #64e1b5) 20%, transparent);
+  --warning: var(--vk-color-status-warning, #ff9f43);
+  --danger: var(--vk-color-status-danger, #f87171);
+  font-family: var(--vk-font-sans, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
 }
 
 *, *::before, *::after {
@@ -21,8 +21,8 @@
 
 body {
   margin: 0;
-  font-family: var(--vibe-font-family, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
-  background: radial-gradient(circle at top, rgba(181, 76, 255, 0.15), transparent 45%), #01030a;
+  font-family: var(--vk-font-sans, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  background: radial-gradient(circle at top, color-mix(in srgb, var(--accent) 20%, transparent) 0%, transparent 45%), var(--bg);
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
@@ -33,6 +33,7 @@ main {
   flex-direction: column;
   gap: 64px;
   padding-bottom: 120px;
+  background: var(--vk-color-bg-canvas);
 }
 
 a {
@@ -67,6 +68,14 @@ img {
   font-size: 1.2rem;
   color: var(--muted);
   max-width: 720px;
+}
+
+.vk-section--full {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  width: 100vw;
 }
 
 .muted {
@@ -514,61 +523,6 @@ img {
 .hero-copy p {
   font-size: 1.3rem;
   color: #1e2430;
-}
-
-#story {
-  position: relative;
-  color: #fff;
-}
-
-.slide {
-  height: 140vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.bg-layer {
-  position: fixed;
-  inset: 0;
-  z-index: -3;
-}
-
-.bg-img {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0;
-}
-
-.blur-layer {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  backdrop-filter: blur(0px);
-  z-index: -1;
-}
-
-.copy {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -120%, 0);
-  text-align: center;
-  color: #fff;
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
-}
-
-.copy h1 {
-  font-size: clamp(34px, 5vw, 72px);
-  margin-bottom: 18px;
-}
-
-.copy p {
-  font-size: clamp(16px, 2vw, 26px);
-  max-width: 680px;
-  margin: 0 auto;
 }
 
 #offer {

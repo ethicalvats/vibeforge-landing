@@ -1,0 +1,9 @@
+{
+  "name": "StoriesPlugin",
+  "packagePath": "../../../vibekit-pre/PluginPackages/StoriesPlugin",
+  "packageName": "StoriesPlugin",
+  "product": "StoriesPlugin",
+  "entry": "register_stories_plugin",
+  "allow-serve": true,
+  "library": "libStoriesPlugin.dylib"
+}

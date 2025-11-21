@@ -1,7 +1,7 @@
 :root {
-    --vibe-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --vibe-font-family: "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
     --vibe-accent-color: #6366F1;
     --vibe-accent-foreground: #FFFFFF;
-    --vibe-accent-strong: #4C51BF;
-    --vibe-accent-muted: #EEF2FF;
+    --vibe-accent-strong: #4A4DB5;
+    --vibe-accent-muted: #E0E0FC;
 }

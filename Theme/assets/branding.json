@@ -1,9 +1,9 @@
 {
-  "displayName": "VibeKit App",
-  "accentColorHex": "#6366F1",
-  "accentForegroundHex": "#FFFFFF",
-  "font": "modernSans",
-  "logoPath": null,
-  "themeIdentifier": "blog",
-  "updatedAt": "2025-01-01T00:00:00Z"
+  "accentColorHex" : "#6366F1",
+  "accentForegroundHex" : "#FFFFFF",
+  "displayName" : "vibeforge-landing",
+  "font" : "SF Pro Rounded",
+  "styleIdentifier" : "base",
+  "themeIdentifier" : "blog",
+  "updatedAt" : "2025-11-21T08:03:40Z"
 }
