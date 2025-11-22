@@ -1,0 +1,273 @@
+{
+  "blocks" : {
+    "0f1d09dbd9f9b6327a2681b7e3e773d4" : {
+      "html" : "<section class=\"vk-section\"><div class=\"vk-stack\" style=\"gap:var(--vk-space-4);\">\n    <p class=\"vk-eyebrow\">Capabilities</p>\n    <h2>One studio, every funnel piece.</h2>\n    <p class=\"vk-lead\">Document your product and tell the story with structured sections.</p>\n    <div class=\"vk-feature-grid\" style=\"grid-template-columns:repeat(3,minmax(0,1fr));\">\n      <article class=\"vk-feature-card\">\n  <h3>Block editor</h3>\n  <p>Fast, tactile writing with live preview.</p>\n</article>\n<article class=\"vk-feature-card\">\n  <h3>Theme control</h3>\n  <p>Brand once, ship in light and dark.</p>\n</article>\n<article class=\"vk-feature-card\">\n  <h3>Plugin aware</h3>\n  <p>Extend with commerce, analytics, and automations.</p>\n</article>\n    </div>\n</div></section>",
+      "id" : "85AA22FE-E2F1-47D6-B45F-34F2FA50A1A5",
+      "kind" : "marketing",
+      "marketing" : {
+        "buttons" : [
+
+        ],
+        "eyebrow" : "Capabilities",
+        "faqItems" : [
+
+        ],
+        "features" : [
+          {
+            "detail" : "Fast, tactile writing with live preview.",
+            "title" : "Block editor"
+          },
+          {
+            "detail" : "Brand once, ship in light and dark.",
+            "title" : "Theme control"
+          },
+          {
+            "detail" : "Extend with commerce, analytics, and automations.",
+            "title" : "Plugin aware"
+          }
+        ],
+        "kind" : "features",
+        "layout" : {
+          "cardColumns" : 3,
+          "width" : "standard"
+        },
+        "metrics" : [
+
+        ],
+        "subtitle" : "Document your product and tell the story with structured sections.",
+        "testimonials" : [
+
+        ],
+        "title" : "One studio, every funnel piece."
+      }
+    },
+    "3fe8f3d4918d75a8e015f26e14d69671" : {
+      "html" : "<section class=\"vk-section\"><div class=\"vk-stack\" style=\"gap:var(--vk-space-4);\">\n    <p class=\"vk-eyebrow\">Proof</p>\n    <h2>Makers already shipping</h2>\n    <div class=\"vk-stack\">\n      <article class=\"vk-testimonial\">\n  <p class=\"vk-testimonial__quote\">I finally shipped a real founder home in one afternoon.</p>\n  <p class=\"vk-testimonial__cite\">Early beta user</p>\n</article>\n<article class=\"vk-testimonial\">\n  <p class=\"vk-testimonial__quote\">It feels like owning my own newsroom.</p>\n  <p class=\"vk-testimonial__cite\">Indie dev</p>\n</article>\n    </div>\n</div></section>",
+      "id" : "19285829-8EC6-428D-9426-7AF2296DB3E0",
+      "kind" : "marketing",
+      "marketing" : {
+        "buttons" : [
+
+        ],
+        "eyebrow" : "Proof",
+        "faqItems" : [
+
+        ],
+        "features" : [
+
+        ],
+        "kind" : "testimonials",
+        "layout" : {
+          "cardColumns" : 1,
+          "width" : "standard"
+        },
+        "metrics" : [
+
+        ],
+        "testimonials" : [
+          {
+            "attribution" : "Early beta user",
+            "quote" : "I finally shipped a real founder home in one afternoon."
+          },
+          {
+            "attribution" : "Indie dev",
+            "quote" : "It feels like owning my own newsroom."
+          }
+        ],
+        "title" : "Makers already shipping"
+      }
+    },
+    "584cf38f0014837d02f0a2905f405297" : {
+      "html" : "<section class=\"vk-section\"><div class=\"vk-stack\" style=\"gap:var(--vk-space-4);\">\n    <p class=\"vk-eyebrow\">Offer</p>\n    <h2>Early access pricing</h2>\n    <div class=\"vk-pricing\">\n      <div class=\"vk-pricing__plan\" data-featured=\"true\">\n        <div class=\"vk-pricing__price\">$39</div>\n        <div class=\"vk-pricing__strike\">$99</div>\n        <div class=\"vk-pill\">60% off • first 100 makers</div>\n        <ul><li>One-time macOS license</li><li>Founder home theme bundle</li><li>1 year of hosting</li></ul>\n      </div>\n    </div>\n</div></section>",
+      "id" : "3F97A741-42BE-4067-9D67-DABC2614F33B",
+      "kind" : "marketing",
+      "marketing" : {
+        "buttons" : [
+
+        ],
+        "eyebrow" : "Offer",
+        "faqItems" : [
+
+        ],
+        "features" : [
+
+        ],
+        "kind" : "pricing",
+        "layout" : {
+          "width" : "standard"
+        },
+        "metrics" : [
+
+        ],
+        "pricing" : {
+          "badge" : "60% off • first 100 makers",
+          "features" : [
+            "One-time macOS license",
+            "Founder home theme bundle",
+            "1 year of hosting"
+          ],
+          "originalPrice" : "$99",
+          "priceLabel" : "$39"
+        },
+        "testimonials" : [
+
+        ],
+        "title" : "Early access pricing"
+      }
+    },
+    "836ac0b8feb2ec8f4930ebb3df03e114" : {
+      "html" : "<section class=\"vk-section\"><div class=\"vk-stack\" style=\"gap:var(--vk-space-4);\">\n    <p class=\"vk-eyebrow\">Trust</p>\n    <h2>Outcomes that compound.</h2>\n    <div class=\"vk-metrics\" style=\"grid-template-columns:repeat(3,minmax(0,1fr));\">\n      <div class=\"vk-metrics__item\">\n  <div class=\"vk-metrics__value\">Minutes</div>\n  <div class=\"vk-metrics__label\">From blank spec to live site</div>\n</div>\n<div class=\"vk-metrics__item\">\n  <div class=\"vk-metrics__value\">Zero Ops</div>\n  <div class=\"vk-metrics__label\">Static deploys with one click</div>\n</div>\n<div class=\"vk-metrics__item\">\n  <div class=\"vk-metrics__value\">Plugins</div>\n  <div class=\"vk-metrics__label\">Marketplace ready for growth</div>\n</div>\n    </div>\n</div></section>",
+      "id" : "A9A2E731-435F-4A0E-B3F0-509DDC57A16F",
+      "kind" : "marketing",
+      "marketing" : {
+        "buttons" : [
+
+        ],
+        "eyebrow" : "Trust",
+        "faqItems" : [
+
+        ],
+        "features" : [
+
+        ],
+        "kind" : "metrics",
+        "layout" : {
+          "statColumns" : 3,
+          "width" : "standard"
+        },
+        "metrics" : [
+          {
+            "label" : "From blank spec to live site",
+            "value" : "Minutes"
+          },
+          {
+            "label" : "Static deploys with one click",
+            "value" : "Zero Ops"
+          },
+          {
+            "label" : "Marketplace ready for growth",
+            "value" : "Plugins"
+          }
+        ],
+        "testimonials" : [
+
+        ],
+        "title" : "Outcomes that compound."
+      }
+    },
+    "a2a5e618acfd28d921ced58973334618" : {
+      "html" : "<section class=\"vk-section\"><div class=\"vk-stack\" style=\"gap:var(--vk-space-4);\">\n    <p class=\"vk-eyebrow\">Call to action</p>\n    <h2>Ready to build your studio?</h2>\n    <p class=\"vk-lead\">Own your landing page, changelog, newsletter, and more from a single macOS window.</p>\n    <div class=\"vk-cluster\" style=\"gap:var(--vk-space-3);\"><a class=\"vk-button\" data-variant=\"solid\" href=\"/purchase\">Buy VibeMaker Studio</a>\n<a class=\"vk-button\" data-variant=\"outline\" href=\"/download\">View download + license</a></div>\n  </div></section>",
+      "id" : "0E3067AF-9393-444C-B122-FAB1C3260F35",
+      "kind" : "marketing",
+      "marketing" : {
+        "buttons" : [
+          {
+            "label" : "Buy VibeMaker Studio",
+            "style" : "solid",
+            "url" : "/purchase"
+          },
+          {
+            "label" : "View download + license",
+            "style" : "outline",
+            "url" : "/download"
+          }
+        ],
+        "eyebrow" : "Call to action",
+        "faqItems" : [
+
+        ],
+        "features" : [
+
+        ],
+        "kind" : "cta",
+        "layout" : {
+          "width" : "standard"
+        },
+        "metrics" : [
+
+        ],
+        "subtitle" : "Own your landing page, changelog, newsletter, and more from a single macOS window.",
+        "testimonials" : [
+
+        ],
+        "title" : "Ready to build your studio?"
+      }
+    },
+    "bac2908622210d7f3fb610c8130666cd" : {
+      "html" : "<section class=\"vk-section vk-hero vk-section--full\" style=\"padding-left:0;padding-right:0;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);width:100vw\"><div class=\"vk-stack\" style=\"gap:var(--vk-space-4);\">\n    <p class=\"vk-eyebrow\">Product</p>\n    <h2>Launch som fjhewbfej ewfje fe wj</h2>\n    <p class=\"vk-lead\">Use vibeforge to author and publish your landing pages, changelog, and founder home without leaving macOS.</p>\n    <div class=\"vk-cluster\" style=\"gap:var(--vk-space-3);\"><a class=\"vk-button\" data-variant=\"solid\" href=\"/purchase\">Buy now</a>\n<a class=\"vk-button\" data-variant=\"ghost\" href=\"/maker-studio\">See features</a></div>\n</div></section>",
+      "id" : "82103885-7405-49E2-96EE-BE1C0B3B5651",
+      "kind" : "marketing",
+      "marketing" : {
+        "buttons" : [
+          {
+            "label" : "Buy now",
+            "style" : "solid",
+            "url" : "/purchase"
+          },
+          {
+            "label" : "See features",
+            "style" : "ghost",
+            "url" : "/maker-studio"
+          }
+        ],
+        "eyebrow" : "Product",
+        "faqItems" : [
+
+        ],
+        "features" : [
+
+        ],
+        "kind" : "hero",
+        "layout" : {
+          "width" : "fullBleed"
+        },
+        "mediaURL" : "/assets/images/editor-in-action.jpeg",
+        "metrics" : [
+
+        ],
+        "subtitle" : "Use vibeforge to author and publish your landing pages, changelog, and founder home without leaving macOS.",
+        "testimonials" : [
+
+        ],
+        "title" : "Launch som fjhewbfej ewfje fe wj"
+      }
+    },
+    "dc71ce229ddddce3cc8cd0717659387b" : {
+      "html" : "<section class=\"vk-section\"><div class=\"vk-stack\" style=\"gap:var(--vk-space-4);\">\n    <p class=\"vk-eyebrow\">FAQ</p>\n    <h2>What else do you need to know?</h2>\n    <div class=\"vk-faq\">\n      <article class=\"vk-faq__item\">\n  <h3 class=\"vk-faq__question\">How does publishing work?</h3>\n  <p>Draft inside vibeforge, then publish a static bundle via vibekit dev or deploy commands.</p>\n</article>\n<article class=\"vk-faq__item\">\n  <h3 class=\"vk-faq__question\">What do I need?</h3>\n  <p>macOS Monterey or newer plus the vibekit CLI.</p>\n</article>\n    </div>\n</div></section>",
+      "id" : "56092CA1-795C-4BDD-B70B-1C8B4DA5A979",
+      "kind" : "marketing",
+      "marketing" : {
+        "buttons" : [
+
+        ],
+        "eyebrow" : "FAQ",
+        "faqItems" : [
+          {
+            "answer" : "Draft inside vibeforge, then publish a static bundle via vibekit dev or deploy commands.",
+            "question" : "How does publishing work?"
+          },
+          {
+            "answer" : "macOS Monterey or newer plus the vibekit CLI.",
+            "question" : "What do I need?"
+          }
+        ],
+        "features" : [
+
+        ],
+        "kind" : "faq",
+        "layout" : {
+          "width" : "standard"
+        },
+        "metrics" : [
+
+        ],
+        "testimonials" : [
+
+        ],
+        "title" : "What else do you need to know?"
+      }
+    }
+  },
+  "salt" : "b693fc2c490c8b69dbe770f16f8730099ebfcacc50bedc7d9721c353b1cb6453",
+  "version" : 1
+}
