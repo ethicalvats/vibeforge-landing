@@ -235,6 +235,8 @@ function updateStoryAnimations() {
 const hero     = document.getElementById('hero');
 const heroBg   = document.querySelector('.hero-bg');
 const heroCopy = document.querySelector('.hero-copy');
+const STORY_FADE_IN_START = 0.65;
+const STORY_FADE_IN_END = 0.98;
 
 function updateHeroStage() {
   if (!hero) return false;
@@ -256,7 +258,9 @@ function updateHeroStage() {
 
   const firstBg = bgs[0];
   if (firstBg) {
-    firstBg.style.opacity   = progress;
+    const span = Math.max(STORY_FADE_IN_END - STORY_FADE_IN_START, 0.0001);
+    const fade = clamp((progress - STORY_FADE_IN_START) / span, 0, 1);
+    firstBg.style.opacity   = fade;
     firstBg.style.transform = 'scale(1)';
   }
 
