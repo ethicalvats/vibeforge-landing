@@ -1,0 +1,90 @@
+/* vivid blue, slightly more “product-y” */
+
+  :root{
+    color-scheme: light;
+    --vk-font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --vk-color-bg-canvas: #f2f4f7;        /* cool grey */
+    --vk-color-bg-surface: #ffffff;
+    --vk-color-bg-elevated: #eef3ff;      /* bluish elevated surfaces */
+
+    --vk-color-fg-primary: #111827;
+    --vk-color-fg-muted: #6b7280;
+
+    --vk-color-border-subtle: #d1d5db;
+    --vk-color-border-strong: #9ca3af;
+
+    --vk-color-shadow: rgba(15, 23, 42, 0.12);
+    --vk-color-shadow-strong: rgba(15, 23, 42, 0.22);
+
+    --vk-color-accent-brand: #0866ff;     /* Meta blue-ish */
+    --vk-color-accent-contrast: #ffffff;
+
+    --vk-color-status-success: #16a34a;
+    --vk-color-status-warning: #d97706;
+    --vk-color-status-danger: #dc2626;
+    --vk-color-status-info: #2563eb;
+
+    --vk-color-focus-ring: #2563eb;
+    --vk-color-pill-bg: rgba(37, 99, 235, 0.06);
+
+    --vk-shadow-soft: 0 14px 40px var(--vk-color-shadow);
+    --vk-shadow-float: 0 26px 70px var(--vk-color-shadow-strong);
+
+    /* Sharper corners */
+    --vk-radius-xs: 0.1rem;
+    --vk-radius-sm: 0.25rem;
+    --vk-radius-md: 0.35rem;
+    --vk-radius-lg: 0.5rem;
+    --vk-radius-pill: 999px; /* keep pills round for chips/buttons */
+
+    /* Stronger borders, flatter shadows */
+    --vk-border-width: 1px;
+    --vk-color-border-subtle: color-mix(in srgb, var(--vk-color-border-subtle) 70%, #000 30%);
+    --vk-color-border-strong: color-mix(in srgb, var(--vk-color-border-strong) 80%, #000 20%);
+
+    --vk-color-shadow: color-mix(in srgb, var(--vk-color-shadow) 30%, transparent);
+    --vk-color-shadow-strong: color-mix(in srgb, var(--vk-color-shadow-strong) 40%, transparent);
+
+    --vk-shadow-soft: 0 6px 18px var(--vk-color-shadow);
+    --vk-shadow-float: 0 14px 36px var(--vk-color-shadow-strong);
+
+    /* Slightly tighter layout for a “dashboard” feel */
+    --vk-space-4: 0.9rem;
+    --vk-space-5: 1.25rem;
+    --vk-space-6: 1.75rem;
+    --vk-space-7: 2.5rem;
+    --vk-space-8: 3rem;
+  }
+
+@media (prefers-color-scheme: dark) {
+  :root{
+    color-scheme: dark;
+    --vk-color-bg-canvas: #020617;
+    --vk-color-bg-surface: #020617;
+    --vk-color-bg-elevated: #0b1220;
+
+    --vk-color-fg-primary: #f9fafb;
+    --vk-color-fg-muted: #9ca3af;
+
+    --vk-color-border-subtle: #1e293b;
+    --vk-color-border-strong: #334155;
+
+    --vk-color-shadow: rgba(15, 23, 42, 0.7);
+    --vk-color-shadow-strong: rgba(15, 23, 42, 0.9);
+
+    --vk-color-accent-brand: #60a5fa;     /* softer blue in dark mode */
+    --vk-color-accent-contrast: #020617;
+
+    --vk-color-status-success: #22c55e;
+    --vk-color-status-warning: #fbbf24;
+    --vk-color-status-danger: #f97373;
+    --vk-color-status-info: #38bdf8;
+
+    --vk-color-focus-ring: #60a5fa;
+    --vk-color-pill-bg: rgba(148, 163, 184, 0.12);
+
+    --vk-shadow-soft: 0 18px 50px rgba(15, 23, 42, 0.75);
+    --vk-shadow-float: 0 30px 90px rgba(15, 23, 42, 0.95);
+  }
+}
